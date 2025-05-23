@@ -1,0 +1,339 @@
+search
+記事、質問を検索
+トレンド
+質問
+Qiita Tech Festa
+公式イベント
+公式コラム
+open_in_new
+Organization
+
+50
+
+55
+
+
+
+more_horiz
+はじめに
+結果
+そもそもIDE(エディタ)に期待する機能
+Visual Studio Codeセットアップ
+Java Extension Pack
+Language Support for Java(TM) by Red Hat
+Debugger for Java
+Java Test Runner
+Maven for Java
+Lombok Annotations Support for VS Code
+Checkstyle for Java
+Spring Boot Tools
+うまく動かなかったこと
+Spring Boot ToolsのDebug時のエンドポイント表示
+これから試そう（期待）してること
+Java with Kubernetes in VS Code
+VS Live Share/VS Live Share Audio
+info
+この記事は最終更新日から5年以上が経過しています。
+
+
+@h-r-k-matsumoto
+EclipseをやめてVisual Studio Codeに乗り換えれるか試してみる
+Java
+SpringBoot
+VSCode
+spring-boot-tools
+最終更新日 2018年09月01日
+投稿日 2018年09月01日
+はじめに
+仕事では主にJavaを扱ってます。
+そして普段は、IDEとしてEclipseを使っています。
+プロジェクトの構成管理はmavenです。
+
+でも、最近golangの勉強をし始めて、「なんかIDE統一できんのかな・・・」と思い始めてVisual Studio Codeでよくね？と思いチャレンジしたお話です。
+会社だとフロントエンドは、AngularでVisaul Studio Code使っていますし、もしこれができれば統一できるな！あんまりメリットは無いけど！と思った感じです。
+
+結果
+もしかしたら、まだ使いこなせていない or 実は他のプラグイン入れれば便利になるよ！というものがあるかもしれません。コメントいただけると大変助かります。
+
+個人レベルの開発なら十分使える！（むしろ使っていきたい）
+百人規模のプロジェクトなら推奨は高スペックPCはEclipse。低スペックならVS Code。
+基本mavenプロジェクト動けばなんでも良いという規約だからあくまで推奨するものは？レベル。
+IntelliJ IDEAは流行ってるけど、使える人は周りにそんな多く無い。
+Spring Bootとの相性良さそう！
+機能	個人的評価	備考
+コード保管	○	
+インポート保管	△	※1
+コードフォーマット	○	
+コンパイルエラー箇所の表示	○	
+スタイルチェック	○	
+デバッグ機能。	△	※2
+gitリポジトリとの連携	△	※3
+ソースの雛形生成	×	※4
+pom.xmlの依存関係表示	×	※5
+○・・・十分使える！△・・・一部不満。×・・・使えない。		
+※1:複数候補発見された場合、ちょっと使いづらい部分有。(問題箇所クリックして選択）
+※2:stacktraceに表示されたコードから対象となる外部ライブラリのソースを開く機能が多分無い。
+※3:egitほどのGUIは無い。コマンド使える人なら関係無いレベル。
+※4:ありそうなもんだけど・・・新規クラス作成とかは無い。Eclipseみたいなテンプレート機能が欲しい。
+※5:むむ・・・conflict確認とか手軽にできない感じ。まぁ滅多に確認すること無いけど。
+
+そもそもIDE(エディタ)に期待する機能
+これ、達成できたらVisual Studio Codeで良いかなって思ってることです。
+上に記載してあるものが優先順位高いです。
+
+コード保管。入力するの嫌。
+インポート保管。インポート文なんて書かない。
+コードフォーマット。フォーマットしてくれないと泣く。
+コンパイルエラー箇所の表示。
+スタイルチェック。コーディング中に規約のチェックしてくれないとしんどい。
+デバッグ機能。にstacktraceに表示されるクラスをクリックして、該当箇所表示してくれないとデバッグしづらい。
+gitリポジトリとの連携 (個人=github。会社=gitlab)。
+ソースの雛形生成。クラスコメントとかファイルヘッダとか入力したくない。
+pom.xmlの依存関係表示。 dependency:tree 入力したくないしGUIで見たい。
+Visual Studio Codeセットアップ
+アドオンで入れたものです。下記の情報見てセットアップです。
+https://code.visualstudio.com/docs/languages/java
+
+Java Extension Pack
+https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-pack
+image.png
+
+下記のパッケージングです。
+
+Language Support for Java(TM) by Red Hat
+
+
+プログラミングする上でのコード保管やらなんやら入ってます。
+
+Debugger for Java
+
+
+Javaでのデバッグするための機能です。
+
+Java Test Runner
+
+
+JUnitを実行、結果確認など行えるための拡張機能です。
+
+Maven for Java
+
+
+Maven Explorerの表示、および各種タスクを実行するための拡張機能です。
+
+Lombok Annotations Support for VS Code
+image.png
+
+
+
+Lombok使うので入れます。
+
+Checkstyle for Java
+image.png
+
+
+
+コーディング規約は、CheckStyleを使っているので入れます。
+
+Spring Boot Tools
+image.png
+
+
+
+Spring Bootの設定保管とエンドポイント関連の便利機能拡張です。
+
+うまく動かなかったこと
+Spring Boot ToolsのDebug時のエンドポイント表示
+エンドポイントは表示してくれます。
+image.png
+でも・・・そこからエンドポイントを選んでも下記のようにエラーになります。
+image.png
+
+うーん。ブラウザが開くはずなんだけど・・・ちょっとどこにもエラーが出ていないので調査断念。
+https://github.com/spring-projects/sts4/blob/master/CONTRIBUTING.adoc
+みてstackover flowで質問しようかと思ったけど、
+
+spring-tools-4 タグがまだ無い。
+作ったばかりのアカウントじゃ新規タグ作れない
+という感じで・・・
+https://stackoverflow.com/questions/52128210/vscode-not-work-quick-access-for-running-apps-with-spring-boot-tools
+こうなった:disappointed_relieved:
+果たして通じる英語になっているかどうか・・・！
+これから試そう（期待）してること
+Java with Kubernetes in VS Code
+https://code.visualstudio.com/docs/java/java-kubernetes
+おぉ？Kubernetesと連携できるのか。まぁ正直ローカル環境でわざわざKubernetesで動かすメリットはわからないけど面白そう！
+
+VS Live Share/VS Live Share Audio
+ゆるWeb勉強会@札幌 #1 で知った機能。
+請負会社さんの技術的支援する際に、これ使えないかな？ってすごい思ってる。
+QAチケットよりも、slackよりも捗りそう。
+
+
+50
+
+55
+comment
+3
+
+
+新規登録して、もっと便利にQiitaを使ってみよう
+
+あなたにマッチした記事をお届けします
+便利な情報をあとで効率的に読み返せます
+ダークテーマを利用できます
+ログインすると使える機能について
+h-r-k-matsumoto
+@h-r-k-matsumoto
+Java,GCP周りでサービス開発してます。 社内でのナレッジから社外含めてのナレッジに最近切り替えて活動してます。
+rss_feed
+RSS
+trending_up
+今日のトレンド記事
+nasubi_dev
+@nasubi_dev(なすび)
+
+2025年05月20日
+ObsidianをCMSにしたら、思ったより本格的だった話
+CMS
+cloudflare
+ドキュメント
+astro
+Obsidian
+163
+
+Nozomuts
+@Nozomuts
+
+2025年05月20日
+Googleのコーディングエージェント「Jules」を早速使ってみた！
+GitHub
+Google
+AI
+85
+
+WdknWdkn
+@WdknWdkn(健太郎 和田)
+
+2025年05月22日
+「Cursor」で「難解コード」のリーディングがめちゃ楽になった話
+プロジェクト管理
+ドキュメント
+マネジメント
+cursor
+生成AI
+62
+
+python_academia
+@python_academia(Python アカデミア)
+
+2025年05月21日
+プログラミング初学者が知っておくと得しそうな用語を図解にしてみた
+Python
+プログラミング
+新人プログラマ応援
+プログラミング初心者
+駆け出しエンジニア
+50
+
+Nao52
+@Nao52(Naoki Saito)
+in
+株式会社シンシア
+
+2025年05月20日
+1on1を“雑談”で終わらせない！成果につなげる進め方
+書籍
+マネジメント
+コミュニケーション
+1on1
+59
+
+link
+この記事は以下の記事からリンクされています
+mi0
+Spring Boot / Thymeleafの基礎を学ぶ【初心者向け】
+からリンク
+5 years ago
+コメント
+h-r-k-matsumoto
+@h-r-k-matsumoto
+2018-09-01 22:58
+more_horiz
+複数候補発見された場合、ちょっと使いづらい部分有。(問題箇所クリックして選択）
+
+この部分、補足しておきます。Eclipseだと選択ウィンドウが出てシームレスに追加が行えますが、VSCodeだと下記のようにインポート解決できずにエラーとなった箇所をクリックして選択する必要がありました。
+
+通常はコードを書いてる段階で、インポート解決していくのでコピペなどをしない限りは気にするほどでは無いかと思います。
+image.png
+
+
+0
+pebbledash_kat
+@pebbledash_kat
+2020-06-01 16:45
+more_horiz
+アノテーションを多用するプロジェクトの場合なのか、とにかく遅い。
+
+ソースコードを変更してから、コード補完機能がそれに追従するまでがものすごく時間がかかる。
+
+また内部でのコンパイルやコード補完機能の為のソース解析処理が遅かったり、Mavenでのビルドと被ったりしてしまうことがあるのか、デバッグで「compilation problem」が出てしまいもう一度再ビルドするというムダな時間が発生する。
+
+そういう意味では、Eclipseの方が作業しやすいかもしれない。
+
+そもそも、VSCodeでJavaビルドをするためのプラグインって、Eclipseのモジュール(Eclipse JDT)を利用しているようだから、結局はEclipseじゃん･･･
+
+
+1
+ironya
+@ironya
+2024-05-08 10:44
+more_horiz
+公開から大分時間がたっているようですが、?保管、は、?補完、ですね。。。
+
+
+0
+いいね以上の気持ちはコメントで
+
+How developers code is here.
+
+Qiita Tech Festa 2025 を5月20日(火)から7月25日(金)まで開催！
+? 2011-2025Qiita Inc.
+ガイドとヘルプ
+
+About
+利用規約
+プライバシーポリシー
+ガイドライン
+メディアキット
+ご意見・ご要望
+ヘルプ
+広告掲載
+コンテンツ
+
+リリースノート
+公式イベント
+公式コラム
+アドベントカレンダー
+Qiita Tech Festa
+Qiita 表彰プログラム
+エンジニア白書
+API
+公式アカウント
+
+Qiita（キータ）公式
+Qiita マイルストーン
+Qiita 人気の投稿
+Facebook
+YouTube
+ポッドキャスト
+Qiita 関連サービス
+
+Qiita Team
+Qiita Zine
+Qiita 公式ショップ
+運営
+
+運営会社
+採用情報
+Qiita Blog
+ニュースリリース
