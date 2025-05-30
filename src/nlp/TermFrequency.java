@@ -1,20 +1,20 @@
 package nlp;
 
 import java.io.BufferedReader;
-import java.io.Console;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 public class TermFrequency {
+    ArrayList<TfCount> list = new ArrayList<TfCount>();
+
     // public static void main(String[] args) {
     public void tf(String inputFilename, String outputFilename) {
         // 解析対象のファイル名
         // String inputFilename = "data\\001.txt";
         // mecab コマンドで対象ファイルを解析するコマンド文
         String[] command = { "cmd.exe", "/C", "mecab", inputFilename };
-        ArrayList<TfCount> list = new ArrayList<TfCount>();
         int sum = 0;
         try {
             // 解析するコマンドを実行する
