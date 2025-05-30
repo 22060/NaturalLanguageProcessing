@@ -29,17 +29,13 @@ public class DocumentFrequency {
                 // DF のリストの中にエントリがあるか調べる
                 for (int j = 0; j < dfList.size(); j++) {
                     // エントリがあった場合はカウントを増やす
-                    if (dfList.get(j).getWord().getHyousoukei()
-                            .equals(tfCount.getWord().getHyousoukei())) {
+                    if (dfList.get(j).getWord().equals(tfCount.getWord())) {
                         dfList.get(j).setCount(dfList.get(j).getCount() + 1);
                         break;
                     }
                 }
                 // リストにエントリが無かったときは，新しい語としてリストに追加する
-                Word wo = new Word();
-                wo.setHyousoukei(tfCount.getWord().getHyousoukei());
-                wo.setHinshi("名詞");
-                DfCount df = new DfCount(wo, 1);
+                DfCount df = new DfCount(tfCount.getWord(), 1);
                 dfList.add(df);
 
             }
